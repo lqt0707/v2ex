@@ -1,9 +1,10 @@
-import { INode } from '../interfaces/node';
-import { IMember } from '../interfaces/member';
+import { INode } from '../../interfaces/node';
+import { IMember } from '../../interfaces/member';
 import React from 'react';
-import Thread from './thread/thread';
-import {View} from "@tarojs/components";
-
+import Thread from './thread';
+import { View } from '@tarojs/components';
+import './thread.less';
+import { Loading } from '../loading/loading';
 interface IProps {
   threads: IThread[];
   loading: boolean;
@@ -35,8 +36,8 @@ const ThreadList: React.FC<IProps> = (props: IProps) => {
     );
   });
 
-  return <View className={'thread-list'}>
-    {loading? element:<Loading/>}
-  </View>
+  return (
+    <View className={'thread-list'}>{loading ? <Loading /> : element}</View>
+  );
 };
 export default ThreadList;
