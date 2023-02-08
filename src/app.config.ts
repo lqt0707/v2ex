@@ -1,5 +1,11 @@
 export default defineAppConfig({
-  pages: ['pages/index/index', 'pages/hot/hot', 'pages/nodes/nodes','pages/thread_detail/thread_detail'],
+  pages: [
+    'pages/index/index',
+    'pages/hot/hot',
+    'pages/nodes/nodes',
+    'pages/thread_detail/thread_detail',
+    'pages/node_detail/node_detail',
+  ],
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
@@ -27,9 +33,9 @@ export default defineAppConfig({
         text: '节点',
       },
     ],
-    color:'#000',
-    selectedColor:'#56abe4',
-    backgroundColor:'#fff',
-    borderStyle:'white'
+    color: '#000',
+    selectedColor: '#56abe4',
+    backgroundColor: '#fff',
+    borderStyle: 'white',
   },
 });

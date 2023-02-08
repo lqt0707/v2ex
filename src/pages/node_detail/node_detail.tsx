@@ -1,6 +1,6 @@
 import { IThread } from '../../interfaces/thread';
 import React, { useCallback, useEffect, useState } from 'react';
-import Taro from '@tarojs/taro';
+import Taro, { Current } from '@tarojs/taro';
 import api from '../../utils/api';
 import { View } from '@tarojs/components';
 import ThreadList from '../../components/thread/thread_list';
@@ -10,26 +10,36 @@ interface IState {
   threads: IThread[];
 }
 
-const Hot: React.FC<IState> = () => {
+const NodeDetail: React.FC<IState> = () => {
+  const { full_name, short_name } = Current.router?.params;
+
   const [loading, setLoading] = useState<boolean>(true);
   const [threads, setThreads] = useState<IThread[]>([]);
 
-  const getHotNodes = useCallback(async () => {
+  const getNodeDetail = useCallback(async () => {
     try {
+      const {
+        data: { id },
+      } = await Taro.request({
+        url: api.getNodeInfo({
+          name: short_name,
+        }),
+      });
       const res = await Taro.request<IThread[]>({
-        url: api.getHotNodes(),
+        url: api.getTopics({ node_id: id }),
       });
       setThreads(res.data);
       setLoading(false);
     } catch (e) {
       await Taro.showToast({
-        title: '载入远程数据失败',
+        title: '载入远程数据错误',
       });
     }
   }, []);
 
   useEffect(() => {
-    getHotNodes();
+    Taro.setNavigationBarTitle({ title: decodeURI(full_name) });
+    getNodeDetail();
   }, []);
 
   return (
@@ -38,4 +48,4 @@ const Hot: React.FC<IState> = () => {
     </View>
   );
 };
-export default Hot;
+export default NodeDetail;

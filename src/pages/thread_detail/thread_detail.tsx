@@ -4,8 +4,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import api from "../../utils/api";
 import Taro from "@tarojs/taro";
 import { Image, RichText, View } from "@tarojs/components";
-import { Loading } from "../../components/loading/loading";
 import Thread from "../../components/thread/thread";
+import { Loading } from "../../components/loading/loading";
 import "./index.less";
 interface IState {
   loading: boolean;
